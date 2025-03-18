@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/e6dbe78d-83af-4e1a-92fb-621b483cbe33)Company: CODTECH IT SOLUTIONS
+Company: CODTECH IT SOLUTIONS
 
 Name:RELLI YASODHA
 
