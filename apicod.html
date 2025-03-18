@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weather API Integration - CODTECH Internship</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #333;
+    }
+    #weatherBox {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      display: none;
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .label {
+      font-weight: bold;
+    }
+    footer {
+      margin-top: 50px;
+      font-size: 14px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Weather Data Fetching Webpage</h1>
+  <p>Enter your city name to get live weather data</p>
+
+  <input type="text" id="cityInput" placeholder="Enter city name">
+  <button onclick="getWeather()">Get Weather</button>
+
+  <div id="weatherBox">
+    <h2 id="cityName"></h2>
+    <p><span class="label">Temperature:</span> <span id="temp"></span> °C</p>
+    <p><span class="label">Weather:</span> <span id="weather"></span></p>
+    <p><span class="label">Humidity:</span> <span id="humidity"></span>%</p>
+    <p><span class="label">Wind Speed:</span> <span id="wind"></span> km/h</p>
+  </div>
+
+  <footer>
+    ✅ Internship Task – API Integration Project | Completion Certificate on Internship End Date<br>
+    © CODTECH Internship Program
+  </footer>
+
+  <script>
+    async function getWeather() {
+      const city = document.getElementById('cityInput').value;
+      const apiKey = 'feb14765018d569ab51cb2157d438e03';  // <-- Replace with your actual API Key
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (data.cod === 200) {
+          document.getElementById('weatherBox').style.display = 'block';
+          document.getElementById('cityName').innerText = data.name;
+          document.getElementById('temp').innerText = data.main.temp;
+          document.getElementById('weather').innerText = data.weather[0].description;
+          document.getElementById('humidity').innerText = data.main.humidity;
+          document.getElementById('wind').innerText = data.wind.speed;
+        } else {
+          alert('City not found. Try again.');
+        }
+      } catch (err) {
+        alert('Error fetching weather data. Please try later.');
+      }
+    }
+  </script>
+
+</body>
+</html>
